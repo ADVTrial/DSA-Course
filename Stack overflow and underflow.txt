@@ -1,0 +1,19 @@
+Stack overflow and underflow:
+
+In the context of stacks, "overflow" and "underflow" refer to specific scenarios related to the capacity and emptiness of the stack, respectively.
+
+Overflow:
+---------
+-Stack overflow occurs when an attempt is made to push an element onto a full stack. In other words, the stack has reached its maximum capacity and cannot accommodate any more elements.
+
+-This situation typically arises in implementations of fixed-size stacks where the capacity is predefined. When the number of elements pushed onto the stack exceeds this predefined capacity, a stack overflow occurs.
+
+-Stack overflow can lead to unexpected behavior, crashes, or errors in the program.
+
+Underflow:
+----------
+-Stack underflow occurs when an attempt is made to pop an element from an empty stack. In other words, the stack is empty, and there are no elements to pop.
+
+-This situation can arise when attempting to pop elements from an already empty stack or when trying to access elements from an uninitialized or uninitialized stack.
+
+-Stack underflow can lead to unexpected behavior, crashes, or errors in the program.
