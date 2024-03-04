@@ -1,0 +1,12 @@
+Expression Evaluation:
+Algorithm to evaluate a postfix expression using a stack:
+
+1.Initialize an empty stack to hold operands.
+2.Scan the postfix expression from left to right.
+3.For each element in the postfix expression:
+    ->If the element is an operand, push it onto the stack.
+    ->If the element is an operator:
+	a. Pop the top two elements from the stack as operands.
+	b. Perform the operation on these operands based on the 			   operator.
+	c. Push the result back onto the stack.
+4.After scanning the entire postfix expression, the result will be the only element left on the stack.
