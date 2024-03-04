@@ -1,0 +1,14 @@
+Algorithm for Conversion of Infix expression to a postfix expression:
+
+1.Initialize an empty stack for operators.
+2.Initialize an empty string for the output postfix expression.
+3.Scan the infix expression from left to right:
+    •If the scanned character is an operand (operand can be a digit, variable, etc.), append it to the output string.
+    •If the scanned character is an operator:
+	•If the stack is empty or contains a left parenthesis on top, push the operator onto the stack.
+	•If the scanned operator has higher precedence than the operator on top of the stack, push it onto the stack.
+	•If the scanned operator has lower precedence than the operator on top of the stack, pop operators from the 	 stack and append them to the output string until the stack is empty, or a left parenthesis is encountered on 	 top of the stack, or the precedence of the scanned operator is higher than the operator being popped from          the stack. Then push the scanned operator onto the stack.
+	•If the scanned character is a left parenthesis '(', push it onto the stack.
+	•If the scanned character is a right parenthesis ')', pop operators from the stack and append them to the output string until a left parenthesis is encountered. Pop and discard the left parenthesis.
+4.After scanning the entire infix expression, pop any remaining operators from the stack and append them to the output string.
+5.The resultant string is the postfix expression.
