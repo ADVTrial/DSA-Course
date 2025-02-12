@@ -1,0 +1,80 @@
+Algorithm for Postfix to Infix Conversion
+
+A postfix expression is evaluated using a stack data structure. The conversion from postfix to infix follows these steps:
+
+Algorithm
+1.Initialize an empty stack to store intermediate expressions.
+2.Scan the postfix expression from left to right.
+3.For each symbol in the expression:
+    -If the symbol is an operand (e.g., a variable or number):
+	->Push it onto the stack.
+    -If the symbol is an operator (+, -, , /, etc.):
+	->Pop the top two elements from the stack.
+	->Form a new expression by enclosing the operands with the operator in between inside 	  parentheses.
+	->Push this new expression back onto the stack.
+4.After scanning the entire postfix expression:
+   -The stack will contain a single element, which is the equivalent infix expression.
+
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+// Function to check if a character is an operator
+bool isOperator(char c) {
+    return (c == '+' || c == '-' || c == '*' || c == '/');
+}
+
+// Function to convert postfix to infix
+string postfixToInfix(string postfix) {
+    stack<string> s;
+    
+    for (char c : postfix) {
+        // If character is an operand, push it as a string onto the stack
+        if (isalnum(c)) {
+            string op(1, c);
+            s.push(op);
+        }
+        // If character is an operator
+        else if (isOperator(c)) {
+            // Pop two operands from stack
+            string op2 = s.top(); s.pop();
+            string op1 = s.top(); s.pop();
+            
+            // Form a new string with parentheses
+            string newExpr = "(" + op1 + c + op2 + ")";
+            
+            // Push the new expression back onto the stack
+            s.push(newExpr);
+        }
+    }
+    
+    // The final element in the stack is the complete infix expression
+    return s.top();
+}
+
+int main() {
+    string postfix = "ab+c*"; // Example postfix expression
+    cout << "Postfix Expression: " << postfix << endl;
+    cout << "Infix Expression: " << postfixToInfix(postfix) << endl;
+    
+    return 0;
+}
+Example Execution
+Input:
+Postfix: ab+c*
+
+Process:
+Read a, push to stack.
+Read b, push to stack.
+Read +, pop b and a, create (a+b), push it.
+Read c, push to stack.
+Read *, pop c and (a+b), create ((a+b)*c), push it.
+Final expression: ((a+b)*c)
+
+Output:
+Infix: ((a+b)*c)
+
+Complexity Analysis
+Time Complexity: O(n) – Each character is processed once.
+Space Complexity: O(n) – Stack stores intermediate expressions.
