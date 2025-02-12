@@ -1,0 +1,85 @@
+Algorithm for Prefix to Infix Conversion
+A prefix expression is converted to an infix expression using a stack-based approach.
+
+Algorithm
+1.Initialize an empty stack to store intermediate expressions.
+2.Scan the prefix expression from right to left.
+3.For each symbol in the expression:
+    -If the symbol is an operand (e.g., a variable or number):
+	->Push it onto the stack.
+    -If the symbol is an operator (+, -, , /, etc.):
+	->Pop the top two elements from the stack.
+	->Form a new infix expression by enclosing the operands with the operator in between inside 	parentheses.
+	->Push this new expression back onto the stack.
+4.After scanning the entire prefix expression:
+    -The stack will contain a single element, which is the equivalent infix expression.
+
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+// Function to check if a character is an operator
+bool isOperator(char c) {
+    return (c == '+' || c == '-' || c == '*' || c == '/');
+}
+
+// Function to convert prefix to infix
+string prefixToInfix(string prefix) {
+    stack<string> s;
+
+    // Traverse the prefix expression from right to left
+    for (int i = prefix.length() - 1; i >= 0; i--) {
+        char c = prefix[i];
+
+        // If character is an operand, push it onto the stack
+        if (isalnum(c)) {
+            string op(1, c);
+            s.push(op);
+        }
+        // If character is an operator
+        else if (isOperator(c)) {
+            // Pop two operands from stack
+            string op1 = s.top(); s.pop();
+            string op2 = s.top(); s.pop();
+            
+            // Form a new string in infix order
+            string newExpr = "(" + op1 + c + op2 + ")";
+            
+            // Push the new expression back onto the stack
+            s.push(newExpr);
+        }
+    }
+
+    // The final element in the stack is the complete infix expression
+    return s.top();
+}
+int main() {
+    string prefix = "*+AB-CD"; // Example prefix expression
+    cout << "Prefix Expression: " << prefix << endl;
+    cout << "Infix Expression: " << prefixToInfix(prefix) << endl;
+
+    return 0;
+}
+
+
+Example 
+Input:
+Prefix: *+AB-CD
+
+Process:
+Read D, push to stack.
+Read C, push to stack.
+Read -, pop C and D, form (C-D), push it.
+Read B, push to stack.
+Read A, push to stack.
+Read +, pop A and B, form (A+B), push it.
+Read *, pop (A+B) and (C-D), form ((A+B)*(C-D)), push it.
+Final expression: ((A+B)*(C-D))
+
+Output:
+Infix: ((A+B)*(C-D))
+
+Complexity Analysis
+Time Complexity: O(n) – Each character is processed once.
+Space Complexity: O(n) – Stack stores intermediate expressions.
